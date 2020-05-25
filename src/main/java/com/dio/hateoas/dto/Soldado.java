@@ -1,12 +1,23 @@
 package com.dio.hateoas.dto;
 
+import com.dio.hateoas.enums.Raca;
+
 public class Soldado {
 
+    private Long id;
     private String cpf;
     private String nome;
-    private String raca;
+    private Raca raca;
     private String arma;
+    private String status;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCpf() {
         return cpf;
@@ -16,7 +27,6 @@ public class Soldado {
         this.cpf = cpf;
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -25,11 +35,11 @@ public class Soldado {
         this.nome = nome;
     }
 
-    public String getRaca() {
+    public Raca getRaca() {
         return raca;
     }
 
-    public void setRaca(String raca) {
+    public void setRaca(Raca raca) {
         this.raca = raca;
     }
 
@@ -39,5 +49,13 @@ public class Soldado {
 
     public void setArma(String arma) {
         this.arma = arma;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -1,9 +1,9 @@
 package com.dio.hateoas.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.ResourceSupport;
 
-public class SoldadoListResponse extends RepresentationModel {
+public class SoldadoListResponse extends ResourceSupport {
     private Long id;
     private String nome;
     private String raca;

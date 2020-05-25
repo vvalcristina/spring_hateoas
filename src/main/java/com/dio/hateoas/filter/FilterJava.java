@@ -20,9 +20,7 @@ public class FilterJava implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         logger.info("Chegou no portão do castelo");
-
         HttpServletRequest req = (HttpServletRequest) request;
         Enumeration<String> headerNames = req.getHeaderNames();
         Map<String,String> mapHeaders = Collections.list(headerNames)
@@ -30,12 +28,12 @@ public class FilterJava implements Filter {
                 .collect(Collectors.toMap(it ->it, req::getHeader));
 
         if(mapHeaders.get("authorization") != null && mapHeaders.get("authorization").equals("DARTHVADER")){
-
+            chain.doFilter(request,response);
         }else{
             HttpServletResponse res = (HttpServletResponse) response;
             res.sendError(403);
         }
-        logger.info("Finalizou a execução");
+        logger.info("Saiu do portão do castelo");
 
     }
 }

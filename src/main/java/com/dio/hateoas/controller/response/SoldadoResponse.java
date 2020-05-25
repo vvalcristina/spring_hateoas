@@ -1,14 +1,15 @@
 package com.dio.hateoas.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.ResourceSupport;
 
-public class SoldadoResponse extends RepresentationModel {
+public class SoldadoResponse extends ResourceSupport {
     private Long id;
     private String cpf;
     private String nome;
     private String raca;
     private String arma;
+    private String status;
 
     @JsonProperty("id")
     public Long getResourceId() {
@@ -50,5 +51,13 @@ public class SoldadoResponse extends RepresentationModel {
 
     public void setArma(String arma) {
         this.arma = arma;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

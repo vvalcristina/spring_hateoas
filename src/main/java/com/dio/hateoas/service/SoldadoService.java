@@ -8,10 +8,9 @@ import com.dio.hateoas.entity.SoldadoEntity;
 import com.dio.hateoas.repository.SoldadoRepository;
 import com.dio.hateoas.resource.SoldadoResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,11 +49,11 @@ public class SoldadoService {
         soldadoRepository.delete(soldado);
     }
 
-    public CollectionModel<SoldadoListResponse> buscarSoldados(){
+    public Resources<SoldadoListResponse> buscarSoldados(){
        List<SoldadoEntity> all = soldadoRepository.findAll();
        List<SoldadoListResponse>soldadoStream = all.stream()
                .map(it -> soldadoResource.criarLink(it))
                .collect(Collectors.toList());
-       return new CollectionModel<>(soldadoStream);
+       return new Resources<>(soldadoStream);
     }
 }
