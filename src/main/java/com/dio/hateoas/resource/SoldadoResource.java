@@ -2,6 +2,7 @@ package com.dio.hateoas.resource;
 
 import com.dio.hateoas.controller.SoldadoController;
 import com.dio.hateoas.controller.response.SoldadoListResponse;
+import com.dio.hateoas.controller.response.SoldadoResponse;
 import com.dio.hateoas.entity.SoldadoEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.hateoas.Link;
@@ -25,5 +26,24 @@ public class SoldadoResource {
         Link link= linkTo(methodOn(SoldadoController.class).buscarSoldado(soldadoEntity.getId())).withSelfRel();
         soldadoListResponse.add(link);
         return soldadoListResponse;
+    }
+
+    public SoldadoResponse criarLinkDetalhe(SoldadoEntity soldadoEntity) {
+        SoldadoResponse soldadoResponse = objectMapper.convertValue(soldadoEntity, SoldadoResponse.class);
+        if (soldadoEntity.getStatus().equals("morto")){
+            Link link= linkTo(methodOn(SoldadoController.class).deletarSoldado(soldadoEntity.getId()))
+                    .withRel("remover")
+                    .withTitle("Deletar Soldado")
+                    .withType("delete");
+            soldadoResponse.add(link);
+        }else if(soldadoEntity.getStatus().equals("vivo")) {
+            Link link= linkTo(methodOn(SoldadoController.class).frenteCastelo(soldadoEntity.getId()))
+                    .withRel("batalhar")
+                    .withTitle("Ir para a frente do Castelo")
+                    .withType("put");
+            soldadoResponse.add(link);
+        }
+
+        return soldadoResponse;
     }
 }

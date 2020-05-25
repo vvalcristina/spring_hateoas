@@ -50,6 +50,11 @@ public class SoldadoController {
         soldadoService.deletarSoldado(id);
         return ResponseEntity.ok().build();
     }
+    @PutMapping("/frente-castelo/{id}")
+    public ResponseEntity frenteCastelo(@PathVariable Long id){
+     //Fazer algo
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping
     public ResponseEntity<CollectionModel<SoldadoListResponse>> buscarSoldados() {
