@@ -20,11 +20,13 @@ import java.util.stream.Collectors;
 @RequestMapping("v1/soldado")
 public class SoldadoController {
 
-    public Object buscarSoldado;
+    private SoldadoService soldadoService;
     private ObjectMapper objectMapper;
 
-    @Autowired
-    SoldadoService soldadoService;
+    public SoldadoController(SoldadoService soldadoService, ObjectMapper objectMapper) {
+        this.soldadoService = soldadoService;
+        this.objectMapper = objectMapper;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<SoldadoResponse> buscarSoldado(@PathVariable() Long id) {
@@ -34,6 +36,7 @@ public class SoldadoController {
 
     @PostMapping
     public ResponseEntity criarSoldado(@RequestBody Soldado soldado) {
+        System.out.println("Entrou no Post");
         soldadoService.criarSoldado(soldado);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
